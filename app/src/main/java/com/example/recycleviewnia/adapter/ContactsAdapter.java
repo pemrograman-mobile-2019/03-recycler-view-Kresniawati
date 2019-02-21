@@ -20,13 +20,13 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     //atribut
     private List<Contact> mContacts;
     //construction
-public ContactsAdapter(List<Contact> contacts){
-    mContacts=contacts;
+public ContactsAdapter(List<Contact> mContacts){
+    this.mContacts=mContacts;
 }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -39,7 +39,8 @@ public ContactsAdapter(List<Contact> contacts){
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
     Contact contact = mContacts.get(i);
-    TextView textView = viewHolder.messageButton;
+    TextView textView = viewHolder.nameTextView;
+    textView.setText(contact.getName());
     Button button = viewHolder.messageButton;
     button.setText(contact.isOnline()?"message":"offline");
     button.setEnabled(contact.isOnline());
@@ -47,19 +48,14 @@ public ContactsAdapter(List<Contact> contacts){
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mContacts.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
-        // Your holder should contain a member variable
-        // for any view that will be set as you render a row
         private TextView nameTextView;
         private  Button messageButton;
 
-        // We also create a constructor that accepts the entire item row
-        // and does the view lookups to find each subview
         public ViewHolder(@NonNull View itemView) {
-            // Stores the itemView in a public final member variable that can be used
-            // to access the context from any ViewHolder instance.
+
             super(itemView);
 
             nameTextView = (TextView) itemView.findViewById(R.id.contact_name);

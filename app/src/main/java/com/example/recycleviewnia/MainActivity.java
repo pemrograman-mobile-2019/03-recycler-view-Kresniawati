@@ -21,7 +21,8 @@ private ArrayList<Contact> contacts;
         RecyclerView rvContact = findViewById(R.id.rvContacts);
         contacts = Contact.createContactsList(20);
         ContactsAdapter adapter = new ContactsAdapter(contacts);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvContact.setAdapter(adapter);
-        rvContact.setLayoutManager(new LinearLayoutManager(this));
+        rvContact.setLayoutManager(layoutManager);
     }
 }
